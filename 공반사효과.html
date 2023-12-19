@@ -41,6 +41,7 @@
             let color="rgb("+r+","+g+","+b+")";
 
             let ball = new Ball(wrapper, x,y,40,40,velX, velY, color);
+            ball.div.innerText=ballArray.length;
             
             ballArray.push(ball);//생성된 볼 하나를 배열에 추가하자 
 
