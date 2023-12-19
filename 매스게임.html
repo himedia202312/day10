@@ -7,10 +7,10 @@
     <script src="../lib/Cell.js"></script>
     <script>
         let wrapper;
-        let cellWidth=50;//각 셀의 너비
-        let cellHeight=50; //각 셀의 높이  
-        let row=20;//셀의 층 수 
-        let col=20;//셀의 호 수 
+        let cellWidth=10;//각 셀의 너비
+        let cellHeight=10; //각 셀의 높이  
+        let row=100;//셀의 층 수 
+        let col=100;//셀의 호 수 
         let cellArray=[]; //모든 셀을 담게될 이차원배열이 될 예정..
 
         function createCell(){
@@ -47,7 +47,7 @@
             //다수의 셀 생성하기 
             createCell();
 
-            setInterval("gameLoop()", 50);
+            setInterval("gameLoop()", 25);
         });
     </script>
 </head>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../lib/Ball.js"></script>
+    <script src="../lib/common.js"></script>
+    <script>
+        let wrapper;
+        let ballArray=[]; //많은 수의 공을 보관하기 위해...
+        let flag=true;
+
+        function init(){
+            wrapper = document.getElementById("wrapper");
+            wrapper.style.width=1000+"px";
+            wrapper.style.height=1000+"px";
+            wrapper.style.background="gray";
+            wrapper.style.margin="auto";
+            wrapper.style.position="relative";
+
+            document.body.addEventListener("keydown", function(){
+                if(event.keyCode==27){ //ESC 
+                    flag=!flag;
+                }else if(event.keyCode==32){ //Space Bar
+                    createBall();
+                }
+
+            });
+        }
+        
+        function createBall(){
+            //태어나는 공마다, velX, velY를 서로 틀리게 랜덤하게 처리 
+            let velX=getRandomByRange(1, 17);  //1~?
+            let velY=getRandomByRange(1, 17);  //1~?
+
+            let ball = new Ball(wrapper, 100,150,40,40,velX, velY, "white");
+            
+            ballArray.push(ball);//생성된 볼 하나를 배열에 추가하자 
+        }
+
+        function gameLoop(){
+            if(flag){
+                //볼의 수만큼  render();
+                for(let i=0;i<ballArray.length;i++){
+                    ballArray[i].render();
+                }
+            }
+        }
+
+        addEventListener("load", function(){
+            init();
+            //createBall();
+            setInterval("gameLoop()", 10);
+        });
+
+    </script>
+</head>
+<body>
+    <div id="wrapper"></div>
+</body>
+</html>
