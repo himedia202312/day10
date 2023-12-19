@@ -33,8 +33,12 @@
             //태어나는 공마다, velX, velY를 서로 틀리게 랜덤하게 처리 
             let velX=getRandomByRange(1, 17);  //1~?
             let velY=getRandomByRange(1, 17);  //1~?
+            let r=getRandom(256);
+            let g=getRandom(256);
+            let b=getRandom(256);
+            let color="rgb("+r+","+g+","+b+")";
 
-            let ball = new Ball(wrapper, 100,150,40,40,velX, velY, "white");
+            let ball = new Ball(wrapper, 100,150,40,40,velX, velY, color);
             
             ballArray.push(ball);//생성된 볼 하나를 배열에 추가하자 
         }
