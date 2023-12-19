@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 1200px;
+            height: 900px;
+            background-image: url(../images/chrismas.png);
+            background-size: 1200px 900px;
+            margin: auto;
+            position: relative;
+        }
+    </style>
+    <script>
+        let wrapper;
+        let s;
+
+        //눈을 정의한다 
+        class Snow{
+            /*클래스는 프로그래밍 언어의 신기술이 아니라, 
+            그냥 기존의 변수, 함수를 하나의 단위로 묶어놓은 단위일 뿐이다*/                
+
+            //명사 = 변수(사물의 상태), 함수 (사물의 동작)
+            constructor(){
+                this.x=0;//눈의 x 좌표
+                this.y=0; //눈의 y 좌표
+                this.velX=5; //눈의 x축 방향으로의 속도
+                this.velY=5; //눈으 y축 방향으로의 속도
+
+                this.div=document.createElement("div");
+                this.div.style.width=5+"px"; //눈의 크기를 다르게 하려면 변수화
+                this.div.style.height=5+"px";//눈의 크기를 다르게 하려면 변수화
+                this.div.style.backgroundColor="rgba(255,255,255,0.4)";
+                this.div.style.position="absolute";
+                this.div.style.left=100+"px";//추후엔 랜덤한 값이 와야함
+                this.div.style.top=100+"px";//추후엔 랜덤한 값이 와야함
+                this.div.style.borderRadius=50+"%";
+
+                //화면에 부착 
+                wrapper.appendChild(this.div);
+            }
+
+            //눈이 내리는 동작을 표현하는 함수 즉 메서드를 정의한다. 
+            move(){
+                this.x= this.x+this.velX; //x축에 대한 누적 식
+                this.y=this.y+this.velY; //y축에 대한 누적 식
+
+                this.div.style.top=this.x+"px";
+                this.div.style.left=this.y+"px";
+            }
+        }
+        
+        //눈 거푸집으로부터, 객체(=인스턴스)하나를 생성해보자 
+        function createSnow(){
+            s=new Snow();//생성자 호출하여 인스턴스 생성시도
+        }
+
+        function gameLoop(){
+            s.move();
+        }
+
+        addEventListener("load", function(){
+            wrapper = document.getElementById("wrapper");
+
+            createSnow();//눈을 생성한다..
+            setInterval("gameLoop()", 100);
+        });
+
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+
+    </div>    
+</body>
+</html>
+
+
+
+
+
