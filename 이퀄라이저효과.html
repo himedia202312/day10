@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //프로그램이 가동되면, wrapper 을 동적으로 만들고, 그 wrapper 들어갈 
+        //이퀄라이저 막대들을 동적으로 생성하여 부착하자...
+        //부착한 이후부터 막대들은 height가 실시간 변경되어야 한다..
+        let wrapper;
+        let barCount=20; //몇개의 막대를 만들지 결정짓는 변수 
+        let barWidth=50; //막대 한개의 너비
+        let barHeight=500; //막대 한개의 높이 
+
+
+        //막대를 표현한다(현실의 막대하나를 정의한다)
+        class Bar{
+            //변수(property:상태,속성을 표현), 함수 (메서드 method)
+            constructor(x, y, width, height, bg, a, targetH){
+                this.width=width; //막대의 너비를 보관
+                this.height=height; //막대의 높이를 보관
+                this.x=x;
+                this.y=y;
+                this.bg=bg;
+                this.a=a; //0.1~0.9
+                this.targetH=targetH; //이 막대의 목표 높이
+
+                this.div=document.createElement("div");
+                this.div.style.position="absolute";
+                this.div.style.left=this.x+"px";
+                this.div.style.top=this.y+"px";
+                this.div.style.width= this.width+"px";   
+                this.div.style.height= this.height+"px";   
+                this.div.style.background=this.bg;
+
+                //wrapper에 부착 
+                wrapper.appendChild(this.div);
+            }
+
+            //막대의 높이 조절 동작 정이 
+            move(){
+                //나의높이 = 나의높이 + a*(목표높이 - 나의높이)
+                this.div.style.height = parseFloat(this.div.style.height)+a*();
+            }
+        }
+
+        addEventListener("load", function(){
+            wrapper = document.createElement("div");
+            wrapper.style.width=(barWidth*barCount)+"px"; //막대한개 * 총수
+            wrapper.style.height=barHeight+"px";
+            wrapper.style.background="gray";
+            wrapper.style.margin="auto";
+            wrapper.style.position="relative";
+
+            document.body.appendChild(wrapper);
+
+            //setInterval("gameLoop()", 10);    
+
+        });        
+
+    </script>
+</head>
+<body>    
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -13,12 +13,12 @@
             margin: auto;
             position: relative;
         }
+        
     </style>
     <script src="../lib/common.js"></script>
     <script>
         let wrapper;
-        let snowArray=[];
-
+        let snowArray=[];//모든 생성된 눈을 담기 위한 배열
 
         //눈을 정의한다 
         class Snow{
@@ -27,23 +27,24 @@
 
             //명사 = 변수(사물의 상태), 함수 (사물의 동작)
             constructor(x, y, width, height, velX, velY, op){
+                //객체와 생명을 같이 하는 객체 소속변수를 멤버변수
                 this.x=x;//눈의 x 좌표
                 this.y=y; //눈의 y 좌표
                 this.width=width;
                 this.height=height;
                 this.velX=velX; //눈의 x축 방향으로의 속도
                 this.velY=velY; //눈으 y축 방향으로의 속도
-                this.op=op;
+                this.op=op; //투명도
 
                 this.div=document.createElement("div");
-                this.div.style.width=width+"px"; //눈의 크기를 다르게 하려면 변수화
-                this.div.style.height=height+"px";//눈의 크기를 다르게 하려면 변수화
-                this.div.style.backgroundColor="rgba(255,255,255,1)";
+                this.div.style.width=this.width+"px"; //눈의 크기를 다르게 하려면 변수화
+                this.div.style.height=this.height+"px";//눈의 크기를 다르게 하려면 변수화
+                this.div.style.backgroundColor="rgba(255,255,255,"+this.op+")";
                 this.div.style.position="absolute";
                 this.div.style.left=this.x+"px";//추후엔 랜덤한 값이 와야함
                 this.div.style.top=this.y+"px";//추후엔 랜덤한 값이 와야함
                 this.div.style.borderRadius=50+"%";
-                this.div.filter="blur(5px)";
+                this.div.style.filter="blur(2px)";
 
                 //화면에 부착 
                 wrapper.appendChild(this.div);
@@ -54,44 +55,44 @@
                 this.x= this.x+this.velX; //x축에 대한 누적 식
                 this.y=this.y+this.velY; //y축에 대한 누적 식
 
-                this.div.style.top=this.y+"px";
                 this.div.style.left=this.x+"px";
+                this.div.style.top=this.y+"px";
             }
         }
         
         //눈 거푸집으로부터, 객체(=인스턴스)하나를 생성해보자 
         function createSnow(){
             for(let i=0;i<1000;i++){
-                //constructor(x, y, width, height, velX, velY, op)
-                let x=getRandomByRange(0,1200);
-                let y=getRandomByRange(0,900);
-                let width=getRandomByRange(5,10);
-                let height=getRandomByRange(5,10);
-                let velX=getRandomByRange(-5,5);
-                let velY=getRandomByRange(1,7);
-                let op=getRandomByRange(0.1,1);
+                let x = getRandom(1200); //0~1200 
+                let y = getRandom(900); //0 ~900
+                let width=getRandomByRange(5,13); //5~12
+                let height=getRandomByRange(5, 13); //5~12
+                let velX=getRandomByRange(-5,6);   // -5 ~ 5
+                let velY=getRandomByRange(1,8);   // 1~7
+                let op = getRandomByRange(0.1, 2); //0.1 ~ 1
 
                 let s=new Snow(x, y, width, height, velX, velY, op);//생성자 호출하여 인스턴스 생성시도
                 snowArray.push(s);
             }
         }
 
-        function createInterval(){
-            createSnow();//눈을 생성한다..
-        }
-
         function gameLoop(){
             for(let i=0;i<snowArray.length;i++){
                 snowArray[i].move();
             }
-            
         }
-        
+
+        function createInterval(){
+            createSnow();    
+        }
+
         addEventListener("load", function(){
             wrapper = document.getElementById("wrapper");
-            createSnow();
-            setInterval("createInterval()",8000);
+
+            createSnow();//눈을 생성한다..
             setInterval("gameLoop()", 100);
+            setInterval("createInterval()", 8000);
+            
         });
 
     </script>
